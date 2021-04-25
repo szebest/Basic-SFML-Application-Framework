@@ -40,3 +40,10 @@
 /Debug/Basic-SFML-Application-Framework.vcxproj.FileListAbsolute.txt
 /Debug/vc142.idb
 /Debug/vc142.pdb
+*.pdb
+*.txt
+*.log
+*.ipdb
+*.iobj
+*.recipe
+*.tlog
