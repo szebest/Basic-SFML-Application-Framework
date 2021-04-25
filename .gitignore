@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+/.vs/Basic-SFML-Application-Framework/v16/ipch/AutoPCH
+/.vs/Basic-SFML-Application-Framework/v16
+/Debug/Basic-SF.7dc9366f.tlog
+/Debug/Basic-SFML-Application-Framework.exe.recipe
+/Debug/Basic-SFML-Application-Framework.ilk
+/Debug/Basic-SFML-Application-Framework.log
+/Debug/Basic-SFML-Application-Framework.pdb
+/Debug/Basic-SFML-Application-Framework.vcxproj.FileListAbsolute.txt
+/Debug/vc142.idb
+/Debug/vc142.pdb
