@@ -39,19 +39,28 @@
     <ClCompile Include="src\State\MenuState.cpp">
       <Filter>Pliki źródłowe\src\State</Filter>
     </ClCompile>
+    <ClCompile Include="src\Resources\Holder.cpp">
+      <Filter>Pliki źródłowe\src\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Game.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="src\Resources\Holder.h">
+      <Filter>Pliki źródłowe\src\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Manager.h">
+      <Filter>Pliki źródłowe\src\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Util\Random.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="src\State\BaseState.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki źródłowe\src\Util</Filter>
     </ClInclude>
     <ClInclude Include="src\State\MenuState.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki źródłowe\src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Pliki źródłowe\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State\BaseState.h">
+      <Filter>Pliki źródłowe\src\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #define BASESTATE_H
 
 #include <SFML/Graphics.hpp>
+#include "../Resources/Holder.h"
 
 class Game;
 

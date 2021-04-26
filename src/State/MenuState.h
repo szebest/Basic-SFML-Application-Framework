@@ -16,6 +16,9 @@ public:
 	void draw(sf::RenderTarget& target) override;
 private:
 	bool m_draw = false;
+
+	sf::Text text;
+	sf::Clock cooldown;
 };
 
 #endif

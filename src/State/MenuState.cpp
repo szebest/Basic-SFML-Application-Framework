@@ -6,7 +6,12 @@
 MenuState::MenuState(Game& _game)
 	: BaseState(_game)
 {
-	
+	text.setPosition(m_game->getWindow().getSize().x / 2.f, m_game->getWindow().getSize().y / 2.f);
+	text.setFont(holder::get().fonts.get("arial"));
+	text.setCharacterSize(32);
+	text.setFillColor(sf::Color::White);
+
+	cooldown.restart();
 }
 
 void MenuState::handleEvents(sf::Event e)
@@ -16,15 +21,13 @@ void MenuState::handleEvents(sf::Event e)
 
 void MenuState::update()
 {
-
+	if (cooldown.getElapsedTime().asSeconds() >= 4)
+		m_game->popState();
 }
 
 void MenuState::draw(sf::RenderTarget& target)
 {
-	sf::CircleShape shape;
-	shape.setPosition(100, 100);
-	shape.setRadius(50);
-	shape.setFillColor(sf::Color::Blue);
+	text.setString("Test");
 
-	target.draw(shape);
+	target.draw(text);
 }
