@@ -19,6 +19,8 @@ public:
 
 	void popState();
 
+	void popAndPushState(std::unique_ptr<BaseState> _ptr);
+
 	BaseState& getCurrentState();
 private:
 	void handleEvent();

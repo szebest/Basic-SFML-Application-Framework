@@ -22,12 +22,15 @@ void MenuState::handleEvents(sf::Event e)
 void MenuState::update()
 {
 	if (cooldown.getElapsedTime().asSeconds() >= 4)
-		m_game->popState();
+	{
+		m_game->popAndPushState(std::unique_ptr<MenuState>(new MenuState(*m_game)));
+	}
 }
 
 void MenuState::draw(sf::RenderTarget& target)
 {
 	text.setString("Test");
 
-	target.draw(text);
+	if (cooldown.getElapsedTime().asSeconds() >= 2)
+		target.draw(text);
 }

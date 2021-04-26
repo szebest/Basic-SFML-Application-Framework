@@ -74,6 +74,12 @@ void Game::pushState(std::unique_ptr<BaseState> _ptr)
     m_states.push_back(std::move(_ptr));
 }
 
+void Game::popAndPushState(std::unique_ptr<BaseState> _ptr)
+{
+    m_states.pop_back();
+    m_states.push_back(std::move(_ptr));
+}
+
 void Game::popState()
 {
     m_states.pop_back();
