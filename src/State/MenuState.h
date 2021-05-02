@@ -3,6 +3,7 @@
 
 #include "BaseState.h"
 #include "../GUI/Button.h"
+#include "../GUI/InputForm.h"
 #include "../Game.h"
 
 class MenuState : public BaseState
@@ -16,7 +17,12 @@ public:
 
 	void draw(sf::RenderTarget& target) override;
 private:
+	std::string m_input = "";
+
 	std::vector<std::unique_ptr<Widget>> m_widgets;
+	std::vector<std::unique_ptr<Widget>> m_widgetsAfterClick;
+
+	std::vector<std::unique_ptr<Widget>>* m_active = &m_widgets;
 };
 
 #endif

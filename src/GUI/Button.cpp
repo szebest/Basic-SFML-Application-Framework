@@ -81,6 +81,7 @@ void Button::setFunction(std::function<void()> function)
 
 bool Button::isHovering(const sf::RenderWindow& window)
 {
-    auto mousePos = sf::Mouse::getPosition(window);
-    return m_shape.getGlobalBounds().contains(mousePos.x, mousePos.y);
+    auto pixelPos = sf::Mouse::getPosition(window);
+    auto worldPos = window.mapPixelToCoords(pixelPos);
+    return m_shape.getGlobalBounds().contains(worldPos.x, worldPos.y);
 }

@@ -48,6 +48,9 @@
     <ClCompile Include="src\GUI\Widget.cpp">
       <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\GUI\InputForm.cpp">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Resources\Holder.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="src\Util\util.h">
       <Filter>Pliki źródłowe\src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\InputForm.h">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

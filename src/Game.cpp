@@ -21,7 +21,8 @@ int Game::run()
     //Main loop of the game
     while (m_window.isOpen() && m_states.size() > 0) 
     {
-        handleEvent();
+        if (m_states.size() > 0)
+            handleEvent();
 
         //Calculate time
         auto time = timer.getElapsedTime();
