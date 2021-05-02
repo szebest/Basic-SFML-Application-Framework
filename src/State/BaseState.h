@@ -17,7 +17,7 @@ public:
 
 	virtual ~BaseState() = default;
 
-	virtual void handleEvents(sf::Event e) = 0;
+	virtual void handleEvents(sf::Event e, const sf::RenderWindow& window) = 0;
 
 	virtual void update() = 0;
 

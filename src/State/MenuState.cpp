@@ -1,36 +1,44 @@
 #include "MenuState.h"
 
-
 #include <iostream>
 
 MenuState::MenuState(Game& _game)
 	: BaseState(_game)
 {
-	text.setPosition(m_game->getWindow().getSize().x / 2.f, m_game->getWindow().getSize().y / 2.f);
-	text.setFont(holder::get().fonts.get("arial"));
-	text.setCharacterSize(32);
-	text.setFillColor(sf::Color::White);
+	auto m_button1 = makeButton((sf::Vector2f)_game.getWindow().getSize() / 2.f, sf::Vector2f(200, 100), "Button 1");
 
-	cooldown.restart();
+	m_button1->setFunction([]()
+		{
+			std::cout << "Button 1 was pressed\n";
+		}
+	);
+
+	auto m_button2 = makeButton((sf::Vector2f)_game.getWindow().getSize() / 2.f + sf::Vector2f(0, 150), sf::Vector2f(200, 100), "Button 2");
+
+	m_button2->setFunction([]()
+		{
+			std::cout << "Button 2 was pressed\n";
+		}
+	);
+
+	m_widgets.push_back(std::move(m_button1));
+	m_widgets.push_back(std::move(m_button2));
 }
 
-void MenuState::handleEvents(sf::Event e)
+void MenuState::handleEvents(sf::Event e, const sf::RenderWindow& window)
 {
-	
+	for (auto& widget : m_widgets)
+		widget->handleEvents(e, window);
 }
 
 void MenuState::update()
 {
-	if (cooldown.getElapsedTime().asSeconds() >= 4)
-	{
-		m_game->popAndPushState(std::unique_ptr<MenuState>(new MenuState(*m_game)));
-	}
+	for (auto& widget : m_widgets)
+		widget->update();
 }
 
 void MenuState::draw(sf::RenderTarget& target)
 {
-	text.setString("Test");
-
-	if (cooldown.getElapsedTime().asSeconds() >= 2)
-		target.draw(text);
+	for (auto& widget : m_widgets)
+		widget->draw(target);
 }

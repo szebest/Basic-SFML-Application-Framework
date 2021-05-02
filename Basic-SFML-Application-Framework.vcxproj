@@ -20,17 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GUI\Button.cpp" />
+    <ClCompile Include="src\GUI\Widget.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Resources\Holder.cpp" />
     <ClCompile Include="src\State\MenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GUI\Button.h" />
+    <ClInclude Include="src\GUI\Widget.h" />
     <ClInclude Include="src\Resources\Holder.h" />
     <ClInclude Include="src\Resources\Manager.h" />
     <ClInclude Include="src\State\BaseState.h" />
     <ClInclude Include="src\State\MenuState.h" />
     <ClInclude Include="src\Util\Random.h" />
+    <ClInclude Include="src\Util\util.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -118,6 +123,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Programming Projects\VisualStudio\SFML OpenGL\src\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

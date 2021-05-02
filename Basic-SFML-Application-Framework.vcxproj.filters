@@ -42,6 +42,12 @@
     <ClCompile Include="src\Resources\Holder.cpp">
       <Filter>Pliki źródłowe\src\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="src\GUI\Button.cpp">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Widget.cpp">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Resources\Holder.h">
@@ -61,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="src\State\BaseState.h">
       <Filter>Pliki źródłowe\src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Button.h">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Widget.h">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\util.h">
+      <Filter>Pliki źródłowe\src\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

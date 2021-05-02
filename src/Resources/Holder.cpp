@@ -7,7 +7,6 @@ holder& holder::get()
 	return s_Instance;
 }
 
-holder::holder() : fonts("czcionki", "ttf"), textures("tekstury", "png"), sounds("dzwieki", "wav")
+holder::holder() : fonts("res/czcionki", "ttf"), textures("res/tekstury", "png"), sounds("res/dzwieki", "wav")
 {
-
 }

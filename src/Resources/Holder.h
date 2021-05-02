@@ -1,5 +1,5 @@
-#ifndef HOLDER
-#define HOLDER
+#ifndef HOLDER_H
+#define HOLDER_H
 
 #include <SFML/Audio.hpp>
 #include "Manager.h"

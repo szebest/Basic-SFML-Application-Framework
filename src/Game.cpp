@@ -55,7 +55,7 @@ void Game::handleEvent()
 
     while (m_window.pollEvent(e)) 
     {
-        getCurrentState().handleEvents(e);
+        getCurrentState().handleEvents(e, m_window);
 
         switch (e.type) 
         {
@@ -77,6 +77,12 @@ void Game::pushState(std::unique_ptr<BaseState> _ptr)
 void Game::popAndPushState(std::unique_ptr<BaseState> _ptr)
 {
     m_states.pop_back();
+    m_states.push_back(std::move(_ptr));
+}
+
+void Game::popAndPushAllStates(std::unique_ptr<BaseState> _ptr)
+{
+    m_states.clear();
     m_states.push_back(std::move(_ptr));
 }
 
