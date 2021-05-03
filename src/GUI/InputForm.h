@@ -3,6 +3,8 @@
 
 #include "Widget.h"
 
+#include <windows.h>
+
 class InputForm : public Widget
 {
 public:
@@ -30,6 +32,8 @@ public:
 
 private:
 	sf::RectangleShape m_shape;
+
+	sf::RectangleShape m_select;
 	
 	sf::Text m_text;
 
@@ -37,7 +41,11 @@ private:
 
 	bool m_active;
 
+	bool m_selected;
+
 	bool isHovering(const sf::RenderWindow& window);
+
+	void toClipboard(const std::string& s);
 };
 
 inline std::unique_ptr<InputForm> makeInputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToString)

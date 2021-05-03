@@ -1,7 +1,11 @@
 #include "InputForm.h"
 
-InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToString)
-    : m_modifiedStringPtr(ptrToString)
+#include <iostream>
+
+InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToString) :
+    m_modifiedStringPtr(ptrToString),
+    m_active(false),
+    m_selected(false)
 {
     setColor(sf::Color(60, 60, 60));
     setSize(size);
@@ -13,7 +17,9 @@ InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToStri
     m_text.setCharacterSize(32);
     m_text.setFillColor(sf::Color::Red);
 
-    m_text.setPosition(getPosition().x - getSize().x * 0.49, getPosition().y - 32 * 4 / 5.f);
+    m_text.setPosition(getPosition().x - getSize().x * 0.48, getPosition().y - 32 * 4 / 5.f);
+
+    m_select.setFillColor(sf::Color::Black);
     
     setFont(holder::get().fonts.get("arial"));
 }
@@ -21,21 +27,55 @@ InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToStri
 void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
 {
     switch (e.type) {
+        case sf::Event::KeyPressed:
+        {
+            if (e.KeyPressed == sf::Keyboard::Right)
+                m_selected = false;
+        } break;
         case sf::Event::TextEntered:
         {
             if (m_active)
             {
                 if (e.text.unicode < 128 && e.text.unicode >= 32)
-                    *m_modifiedStringPtr += static_cast<char>(e.text.unicode);
-                else if (e.text.unicode == 8) //Backspace
-                    m_text.setString(*m_modifiedStringPtr = (*m_modifiedStringPtr).substr(0, std::max((int)(*m_modifiedStringPtr).size() - 1, 0)));
+                {
+                    if (m_selected)
+                        *m_modifiedStringPtr = static_cast<char>(e.text.unicode);
+                    else
+                        *m_modifiedStringPtr += static_cast<char>(e.text.unicode);
 
-                if (m_text.getGlobalBounds().width >= 0.98 * getSize().x)
+                    m_selected = false;
+                }
+                else if (e.text.unicode == 8) //Backspace
+                {
+                    if (m_selected)
+                        *m_modifiedStringPtr = "";
+                    else
+                        m_text.setString(*m_modifiedStringPtr = (*m_modifiedStringPtr).substr(0, std::max((int)(*m_modifiedStringPtr).size() - 1, 0)));
+
+                    m_selected = false;
+                }
+                else if (e.text.unicode == 1) //ctrl+A
+                {
+                    m_selected = true;
+                    m_select.setPosition(m_text.getPosition());
+                    m_select.setSize(sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height * 3.f));
+                }
+                else if (e.text.unicode == 3 && m_selected) //ctrl+C
+                    toClipboard(*m_modifiedStringPtr);
+
+                m_text.setString(*m_modifiedStringPtr);
+
+                if (m_text.getGlobalBounds().width >= 0.96 * getSize().x)
+                {
                     m_text.setString(*m_modifiedStringPtr = (*m_modifiedStringPtr).substr(0, std::max((int)(*m_modifiedStringPtr).size() - 1, 0)));
+                    m_text.setString(*m_modifiedStringPtr);
+                }
             }
         } break;
         case sf::Event::MouseButtonPressed:
         {
+            m_selected = false;
+
             if (e.mouseButton.button == sf::Mouse::Left)
             {
                 m_active = isHovering(window);
@@ -53,12 +93,16 @@ void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
 
 void InputForm::update()
 {
-    m_text.setString(*m_modifiedStringPtr);
+    
 }
 
 void InputForm::draw(sf::RenderTarget& target)
 {
     target.draw(m_shape);
+
+    if (m_selected)
+        target.draw(m_select);
+
     target.draw(m_text);
 }
 
@@ -104,4 +148,19 @@ bool InputForm::isHovering(const sf::RenderWindow& window)
     auto pixelPos = sf::Mouse::getPosition(window);
     auto worldPos = window.mapPixelToCoords(pixelPos);
     return m_shape.getGlobalBounds().contains(worldPos.x, worldPos.y);
+}
+
+void InputForm::toClipboard(const std::string& s) {
+    OpenClipboard(0);
+    EmptyClipboard();
+    HGLOBAL hg = GlobalAlloc(GMEM_MOVEABLE, s.size());
+    if (!hg) {
+        CloseClipboard();
+        return;
+    }
+    memcpy(GlobalLock(hg), s.c_str(), s.size());
+    GlobalUnlock(hg);
+    SetClipboardData(CF_TEXT, hg);
+    CloseClipboard();
+    GlobalFree(hg);
 }
