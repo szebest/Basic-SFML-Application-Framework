@@ -22,16 +22,18 @@ InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToStri
     m_select.setFillColor(sf::Color::Black);
     
     setFont(holder::get().fonts.get("arial"));
+
+    m_underline.setFont(holder::get().fonts.get("arial"));
+
+    m_underline.setCharacterSize(32);
 }
 
 void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
 {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        m_selected = false;
+
     switch (e.type) {
-        case sf::Event::KeyPressed:
-        {
-            if (e.KeyPressed == sf::Keyboard::Right)
-                m_selected = false;
-        } break;
         case sf::Event::TextEntered:
         {
             if (m_active)
@@ -78,6 +80,8 @@ void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
 
             if (e.mouseButton.button == sf::Mouse::Left)
             {
+                m_underline.setString("");
+
                 m_active = isHovering(window);
 
                 if (m_active)
@@ -93,7 +97,17 @@ void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
 
 void InputForm::update()
 {
-    
+    m_underline.setPosition(m_text.getPosition().x + m_text.getGlobalBounds().width, m_text.getPosition().y);
+
+    if (m_clock.getElapsedTime().asSeconds() >= 1 && m_active)
+    {
+        if (m_underline.getString().getSize() != 0)
+            m_underline.setString("");
+        else
+            m_underline.setString("_");
+
+        m_clock.restart();
+    }
 }
 
 void InputForm::draw(sf::RenderTarget& target)
@@ -104,6 +118,8 @@ void InputForm::draw(sf::RenderTarget& target)
         target.draw(m_select);
 
     target.draw(m_text);
+
+    target.draw(m_underline);
 }
 
 void InputForm::setPosition(sf::Vector2f pos)

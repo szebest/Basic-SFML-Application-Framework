@@ -32,7 +32,7 @@ MenuState::MenuState(Game& _game)
 		}
 	);
 
-	auto m_inputForm = makeInputForm((sf::Vector2f)_game.getWindow().getSize() / 2.f - sf::Vector2f(0, 150), sf::Vector2f(200, 50), &m_input);
+	auto m_inputForm = makeInputForm((sf::Vector2f)_game.getWindow().getSize() / 2.f - sf::Vector2f(0, 150), sf::Vector2f(400, 50), &m_input);
 
 	m_widgets.push_back(std::move(m_button1));
 	m_widgets.push_back(std::move(m_button2));

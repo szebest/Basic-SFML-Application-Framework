@@ -37,11 +37,15 @@ private:
 	
 	sf::Text m_text;
 
+	sf::Text m_underline;
+
 	std::string* m_modifiedStringPtr;
 
 	bool m_active;
 
 	bool m_selected;
+
+	sf::Clock m_clock;
 
 	bool isHovering(const sf::RenderWindow& window);
 
