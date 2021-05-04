@@ -4,6 +4,7 @@
 #include "BaseState.h"
 #include "../GUI/Button.h"
 #include "../GUI/InputForm.h"
+#include "../GUI/Text.h"
 #include "../Game.h"
 
 class MenuState : public BaseState

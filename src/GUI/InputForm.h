@@ -57,4 +57,9 @@ inline std::unique_ptr<InputForm> makeInputForm(sf::Vector2f pos, sf::Vector2f s
 	return std::make_unique<InputForm>(pos, size, ptrToString);
 }
 
+inline std::unique_ptr<InputForm> makeInputForm(std::unique_ptr<InputForm>& other)
+{
+	return std::make_unique<InputForm>(*other);
+}
+
 #endif

@@ -39,12 +39,19 @@ private:
 
 	sf::Text m_text;
 
+	bool m_shouldCall;
+
 	bool isHovering(const sf::RenderWindow& window);
 };
 
 inline std::unique_ptr<Button> makeButton(sf::Vector2f pos, sf::Vector2f size, const std::string& text)
 {
 	return std::make_unique<Button>(pos, size, text);
+}
+
+inline std::unique_ptr<Button> makeButton(std::unique_ptr<Button>& other)
+{
+	return std::make_unique<Button>(*other);
 }
 
 #endif

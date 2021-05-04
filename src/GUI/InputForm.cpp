@@ -17,7 +17,7 @@ InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToStri
     m_text.setCharacterSize(32);
     m_text.setFillColor(sf::Color::Red);
 
-    m_text.setPosition(getPosition().x - getSize().x * 0.48, getPosition().y - 32 * 4 / 5.f);
+    m_text.setPosition(getPosition().x - getSize().x * 0.48, getPosition().y - m_text.getCharacterSize() * 4 / 5.f);
 
     m_select.setFillColor(sf::Color::Black);
     
@@ -125,6 +125,8 @@ void InputForm::draw(sf::RenderTarget& target)
 void InputForm::setPosition(sf::Vector2f pos)
 {
     m_shape.setPosition(pos - m_shape.getSize() / 2.f);
+
+    m_text.setPosition(getPosition().x - getSize().x * 0.48, getPosition().y - m_text.getCharacterSize() * 4 / 5.f);
 }
 
 sf::Vector2f InputForm::getPosition()
