@@ -2,12 +2,25 @@
 #define TEXT_H
 
 #include "Widget.h"
+#include <sstream>
+#include <functional>
+#include <iostream>
 
 class Text : public Widget
 {
 public:
 	Text(sf::Vector2f pos, const std::string& text);
 
+	Text(const Text&)
+	{
+
+	}
+
+	template<typename... Args>
+	void setArgs(Args... args)
+	{
+		m_func = [this, args...]() { this->m_print(args...); };
+	}
 
 	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
 
@@ -34,6 +47,54 @@ public:
 	void setOutlineThickness(int thickness);
 private:
 	sf::Text m_text;
+
+	std::string m_pattern;
+
+	std::stringstream m_ss;
+
+	sf::Vector2f m_pos;
+
+	std::function<void()> m_func = []() {};
+
+	template<typename T>
+	void m_print(T value)
+	{
+
+	}
+
+	template<typename... Args, typename T>
+	void m_print(T value, Args... args)
+	{
+		m_print(args...);
+	}
+
+	template<typename... Args>
+	void m_print(std::string* value)
+	{
+		m_ss << *value + '\n';
+	}
+
+	template<typename... Args>
+	void m_print(std::string* value, Args... args)
+	{
+		m_ss << *value + '\n';
+
+		m_print(args...);
+	}
+
+	template<typename... Args, typename T>
+	void m_print(T* value)
+	{
+		m_ss << std::to_string(*value) + '\n';
+	}
+
+	template<typename... Args, typename T>
+	void m_print(T* value, Args... args)
+	{
+		m_ss << std::to_string(*value) + '\n';
+
+		m_print(args...);
+	}
 };
 
 inline std::unique_ptr<Text> makeText(sf::Vector2f pos, const std::string& text)

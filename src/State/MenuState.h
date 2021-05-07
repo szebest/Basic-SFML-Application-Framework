@@ -20,6 +20,8 @@ public:
 private:
 	std::string m_input = "";
 
+	int m_value = 5;
+
 	std::vector<std::unique_ptr<Widget>> m_widgets;
 	std::vector<std::unique_ptr<Widget>> m_widgetsAfterClick;
 

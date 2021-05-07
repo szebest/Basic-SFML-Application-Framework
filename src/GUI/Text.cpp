@@ -1,6 +1,7 @@
 #include "Text.h"
 
-Text::Text(sf::Vector2f pos, const std::string& text)
+Text::Text(sf::Vector2f pos, const std::string& text) :
+	m_pattern(text), m_pos(pos)
 {
 	setFont(holder::get().fonts.get("arial"));
 	setText(text);
@@ -16,7 +17,44 @@ void Text::handleEvents(sf::Event e, const sf::RenderWindow& window)
 
 void Text::update()
 {
+	m_ss.clear();
 
+	m_func();
+
+	std::string tmp = "";
+
+	bool special = false;
+
+	for (int i = 0; i < m_pattern.size(); i++)
+	{
+		bool wasSpecial = special;
+
+		if (m_pattern[i] == '-')
+			special = true;
+		else
+			special = false;
+
+		if (m_pattern[i] == '%' && wasSpecial)
+		{
+			std::string val = "";
+
+			getline(m_ss, val);
+
+			if (val.size() > 0)
+				tmp += val;
+		}
+		else if (!special)
+		{
+			if (wasSpecial)
+				tmp = tmp + "-" + m_pattern[i];
+			else
+				tmp += m_pattern[i];
+		}
+	}
+
+	setText(tmp);
+
+	setPosition(m_pos);
 }
 
 void Text::draw(sf::RenderTarget& target)
@@ -26,7 +64,7 @@ void Text::draw(sf::RenderTarget& target)
 
 void Text::setPosition(sf::Vector2f pos)
 {
-	m_text.setPosition(pos - sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height + getCharSize() / 2.f));
+	m_text.setPosition(pos - sf::Vector2f(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f + getCharSize() / 2.f));
 }
 
 sf::Vector2f Text::getPosition()
