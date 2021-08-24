@@ -27,7 +27,7 @@ void Button::handleEvents(sf::Event e, const sf::RenderWindow& window)
 	}
 }
 
-void Button::update()
+void Button::update(const sf::Time& deltaTime)
 {
 	if (m_shouldCall)
 	{

@@ -12,7 +12,7 @@ public:
 
 	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
 
-	void update() override;
+	void update(const sf::Time& deltaTime) override;
 
 	void draw(sf::RenderTarget& target) override;
 

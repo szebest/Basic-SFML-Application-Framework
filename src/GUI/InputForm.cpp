@@ -16,6 +16,7 @@ InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToStri
 
     m_text.setCharacterSize(32);
     m_text.setFillColor(sf::Color::Red);
+    m_text.setString(*m_modifiedStringPtr);
 
     m_text.setPosition(getPosition().x - getSize().x * 0.48, getPosition().y - m_text.getCharacterSize() * 4 / 5.f);
 
@@ -95,7 +96,7 @@ void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
     }
 }
 
-void InputForm::update()
+void InputForm::update(const sf::Time& deltaTime)
 {
     m_underline.setPosition(m_text.getPosition().x + m_text.getGlobalBounds().width, m_text.getPosition().y);
 

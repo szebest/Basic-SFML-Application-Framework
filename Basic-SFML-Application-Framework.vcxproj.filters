@@ -54,6 +54,12 @@
     <ClCompile Include="src\GUI\Text.cpp">
       <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\GUI\FrameRate.cpp">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Selection.cpp">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Resources\Holder.h">
@@ -87,6 +93,12 @@
       <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\GUI\Text.h">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\FrameRate.h">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Selection.h">
       <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClInclude>
   </ItemGroup>

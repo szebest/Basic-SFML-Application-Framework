@@ -18,28 +18,37 @@ int Game::run()
     auto lastTime = sf::Time::Zero;
     auto lag = sf::Time::Zero;
 
+    m_window.setFramerateLimit(60);
+
     //Main loop of the game
     while (m_window.isOpen() && m_states.size() > 0) 
     {
         if (m_states.size() > 0)
+        {
             handleEvent();
 
-        //Calculate time
-        auto time = timer.getElapsedTime();
-        auto elapsed = time - lastTime;
-        lastTime = time;
-        lag += elapsed;
+            //Calculate time
+            auto time = timer.getElapsedTime();
+            auto elapsed = time - lastTime;
+            lastTime = time;
 
-        if (m_states.size() > 0)
-            getCurrentState().update();
+            try
+            {
+                BaseState& currentState = getCurrentState();
+                currentState.update(elapsed);
 
-        //Render
-        m_window.clear();
+                //Render
+                m_window.clear();
 
-        if (m_states.size() > 0)
-            getCurrentState().draw(m_window);
+                currentState.draw(m_window);
 
-        m_window.display();
+                m_window.display();
+            }
+            catch (std::exception& e)
+            {
+                m_window.close();
+            }
+        }
     }
 
     return 0;
@@ -94,5 +103,7 @@ void Game::popState()
 
 BaseState& Game::getCurrentState()
 {
+    if (m_states.size() == 0)
+        throw std::exception();
     return *m_states.back();
 }

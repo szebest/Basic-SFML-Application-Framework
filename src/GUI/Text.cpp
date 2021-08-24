@@ -1,13 +1,22 @@
 #include "Text.h"
 
 Text::Text(sf::Vector2f pos, const std::string& text) :
-	m_pattern(text), m_pos(pos)
+	m_pattern(text), m_pos(pos), m_fixedPos(false)
 {
 	setFont(holder::get().fonts.get("arial"));
 	setText(text);
 	setColor(sf::Color::White);
 	setCharSize(32);
 	setPosition(pos);
+	m_fPos = getPosition() - sf::Vector2f(m_text.getGlobalBounds().width , -m_text.getGlobalBounds().height / 2.f);
+
+	update(sf::Time());
+}
+
+Text::Text(const Text& other) :
+	m_text(other.m_text), m_pattern(other.m_pattern), m_pos(other.m_pos), m_func(other.m_func), m_fixedPos(other.m_fixedPos), m_fPos(other.m_fPos)
+{
+
 }
 
 void Text::handleEvents(sf::Event e, const sf::RenderWindow& window)
@@ -15,7 +24,7 @@ void Text::handleEvents(sf::Event e, const sf::RenderWindow& window)
 
 }
 
-void Text::update()
+void Text::update(const sf::Time& deltaTime)
 {
 	m_ss.clear();
 
@@ -50,6 +59,8 @@ void Text::update()
 			else
 				tmp += m_pattern[i];
 		}
+		else if (wasSpecial)
+			tmp = tmp + "-";
 	}
 
 	setText(tmp);
@@ -64,12 +75,15 @@ void Text::draw(sf::RenderTarget& target)
 
 void Text::setPosition(sf::Vector2f pos)
 {
-	m_text.setPosition(pos - sf::Vector2f(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f + getCharSize() / 2.f));
+	if (m_fixedPos)
+		m_text.setPosition(m_fPos);
+	else
+		m_text.setPosition(pos - sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height) / 2.f);
 }
 
 sf::Vector2f Text::getPosition()
 {
-	return m_text.getPosition() + sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height - getCharSize() / 2.f);
+	return m_text.getPosition() + sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height) / 2.f;
 }
 
 void Text::setCharSize(int size)
@@ -105,4 +119,9 @@ void Text::setOutlineColor(sf::Color color)
 void Text::setOutlineThickness(int thickness)
 {
 	m_text.setOutlineThickness(thickness);
+}
+
+void Text::setFixedPos(bool fixedPos)
+{
+	m_fixedPos = fixedPos;
 }

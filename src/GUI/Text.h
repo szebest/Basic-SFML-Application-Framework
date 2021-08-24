@@ -5,16 +5,14 @@
 #include <sstream>
 #include <functional>
 #include <iostream>
+#include <iomanip>
 
 class Text : public Widget
 {
 public:
 	Text(sf::Vector2f pos, const std::string& text);
 
-	Text(const Text&)
-	{
-
-	}
+	Text(const Text& other);
 
 	template<typename... Args>
 	void setArgs(Args... args)
@@ -24,7 +22,7 @@ public:
 
 	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
 
-	void update() override;
+	void update(const sf::Time& deltaTime) override;
 
 	void draw(sf::RenderTarget& target) override;
 
@@ -45,6 +43,8 @@ public:
 	void setOutlineColor(sf::Color color);
 
 	void setOutlineThickness(int thickness);
+
+	void setFixedPos(bool fixedPos);
 private:
 	sf::Text m_text;
 
@@ -54,7 +54,11 @@ private:
 
 	sf::Vector2f m_pos;
 
+	sf::Vector2f m_fPos;
+
 	std::function<void()> m_func = []() {};
+
+	bool m_fixedPos;
 
 	template<typename T>
 	void m_print(T value)

@@ -19,12 +19,13 @@ public:
 
 	virtual void handleEvents(sf::Event e, const sf::RenderWindow& window) = 0;
 
-	virtual void update() = 0;
+	virtual void update(const sf::Time& deltaTime) = 0;
 
 	virtual void draw(sf::RenderTarget& target) = 0;
 
 protected:
 	Game* m_game = nullptr;
+	bool m_exit = false;
 };
 
 #endif
