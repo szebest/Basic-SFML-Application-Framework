@@ -66,7 +66,7 @@ bool Selection::getSelected()
 	return m_selected;
 }
 
-void Selection::setPointerToSelected(const bool*& _ptr)
+const bool* Selection::getPointerToSelected()
 {
-	_ptr = &m_selected;
+	return &m_selected;
 }

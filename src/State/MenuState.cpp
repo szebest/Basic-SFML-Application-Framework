@@ -7,9 +7,18 @@ MenuState::MenuState(Game& _game)
 {
 	auto m_button1 = makeButton((sf::Vector2f)_game.getWindow().getSize() / 2.f, sf::Vector2f(200, 100), "Button 1");
 
-	auto m_select = makeSelection({ 100, 100 });
+	auto m_multipleSelection = makeMultipleSelection();
 
-	m_select->setPointerToSelected(ptrToSelectBox);
+	for (int i = 0; i < 3; i++)
+	{
+		auto m_select1 = makeSelection(sf::Vector2f( 100, 100 * (i + 1)));
+		m_multipleSelection->addSelection(std::move(m_select1));
+
+		auto m_text = makeText(sf::Vector2f( 200, 90 + 100 * i ), "test" + std::to_string(i + 1));
+		m_widgetsAfterClick.push_back(std::move(m_text));
+	}
+
+	vecPtrToSelectBox = m_multipleSelection->getHandleToPointersToValues();
 
 	m_button1->setFunction([&]()
 		{
@@ -57,7 +66,7 @@ MenuState::MenuState(Game& _game)
 	m_widgets.push_back(std::move(m_fps1));
 
 	m_widgetsAfterClick.push_back(std::move(m_button11));
-	m_widgetsAfterClick.push_back(std::move(m_select));
+	m_widgetsAfterClick.push_back(std::move(m_multipleSelection));
 
 	/*auto m_fps1 = makeFrameRate(sf::Vector2f(125, 0));
 
@@ -97,6 +106,9 @@ void MenuState::handleEvents(sf::Event e, const sf::RenderWindow& window)
 
 void MenuState::update(const sf::Time& deltaTime)
 {
+	for (const bool* ptr : vecPtrToSelectBox)
+		std::cout << *ptr << " ";
+	std::cout << std::endl;
 	m_value++;
 	if (m_value > 1000)
 		m_value = 0;

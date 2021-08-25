@@ -7,6 +7,8 @@
 #include "../GUI/Text.h"
 #include "../GUI/FrameRate.h"
 #include "../GUI/Selection.h"
+#include "../GUI/MultipleSelection.h"
+#include "../GUI/SingleSelection.h"
 #include "../Game.h"
 
 class MenuState : public BaseState
@@ -25,7 +27,7 @@ private:
 
 	int m_value = 5;
 
-	const bool* ptrToSelectBox = nullptr;
+	std::vector<const bool*> vecPtrToSelectBox;
 
 	const float* fpsValuePointer = nullptr;
 

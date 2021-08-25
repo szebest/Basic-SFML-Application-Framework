@@ -22,7 +22,7 @@ public:
 
 	bool getSelected();
 
-	void setPointerToSelected(const bool*& _ptr);
+	const bool* getPointerToSelected();
 
 private:
 	sf::CircleShape m_outerShape;
