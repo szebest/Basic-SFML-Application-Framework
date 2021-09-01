@@ -45,6 +45,10 @@ public:
 	void setOutlineThickness(int thickness);
 
 	void setFixedPos(bool fixedPos);
+
+	sf::Vector2f getSize();
+
+	std::string getString();
 private:
 	sf::Text m_text;
 
@@ -107,6 +111,11 @@ inline std::unique_ptr<Text> makeText(sf::Vector2f pos, const std::string& text)
 }
 
 inline std::unique_ptr<Text> makeText(std::unique_ptr<Text>& other)
+{
+	return std::make_unique<Text>(*other);
+}
+
+inline std::unique_ptr<Text> makeText(const std::unique_ptr<Text>& other)
 {
 	return std::make_unique<Text>(*other);
 }

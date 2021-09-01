@@ -33,7 +33,7 @@ void MultipleSelection::addSelection(std::unique_ptr<Selection> _selections)
 	m_selections.push_back(std::move(_selections));
 }
 
-std::vector<const bool*> MultipleSelection::getHandleToPointersToValues()
+std::vector<const bool*> MultipleSelection::getPointersToValues()
 {
 	std::vector<const bool*> vecOfPointers;
 	vecOfPointers.reserve(m_selections.size());

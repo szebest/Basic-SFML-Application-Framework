@@ -24,6 +24,7 @@
     <ClCompile Include="src\GUI\FrameRate.cpp" />
     <ClCompile Include="src\GUI\InputForm.cpp" />
     <ClCompile Include="src\GUI\MultipleSelection.cpp" />
+    <ClCompile Include="src\GUI\Options.cpp" />
     <ClCompile Include="src\GUI\Selection.cpp" />
     <ClCompile Include="src\GUI\SingleSelection.cpp" />
     <ClCompile Include="src\GUI\Text.cpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="src\GUI\Button.h" />
     <ClInclude Include="src\GUI\FrameRate.h" />
     <ClInclude Include="src\GUI\InputForm.h" />
+    <ClInclude Include="src\GUI\Options.h" />
     <ClInclude Include="src\GUI\Selection.h" />
     <ClInclude Include="src\GUI\MultipleSelection.h" />
     <ClInclude Include="src\GUI\SingleSelection.h" />

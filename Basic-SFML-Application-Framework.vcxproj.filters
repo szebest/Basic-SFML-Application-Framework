@@ -66,6 +66,9 @@
     <ClCompile Include="src\GUI\SingleSelection.cpp">
       <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\GUI\Options.cpp">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Resources\Holder.h">
@@ -111,6 +114,9 @@
       <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\GUI\SingleSelection.h">
+      <Filter>Pliki źródłowe\src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Options.h">
       <Filter>Pliki źródłowe\src\GUI</Filter>
     </ClInclude>
   </ItemGroup>

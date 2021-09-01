@@ -9,8 +9,6 @@ Text::Text(sf::Vector2f pos, const std::string& text) :
 	setCharSize(32);
 	setPosition(pos);
 	m_fPos = getPosition() - sf::Vector2f(m_text.getGlobalBounds().width , -m_text.getGlobalBounds().height / 2.f);
-
-	update(sf::Time());
 }
 
 Text::Text(const Text& other) :
@@ -124,4 +122,15 @@ void Text::setOutlineThickness(int thickness)
 void Text::setFixedPos(bool fixedPos)
 {
 	m_fixedPos = fixedPos;
+}
+
+sf::Vector2f Text::getSize()
+{
+	auto globalBounds = m_text.getGlobalBounds();
+	return sf::Vector2f(globalBounds.width, globalBounds.height);
+}
+
+std::string Text::getString()
+{
+	return m_text.getString();
 }

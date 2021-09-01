@@ -9,6 +9,7 @@
 #include "../GUI/Selection.h"
 #include "../GUI/MultipleSelection.h"
 #include "../GUI/SingleSelection.h"
+#include "../GUI/Options.h"
 #include "../Game.h"
 
 class MenuState : public BaseState

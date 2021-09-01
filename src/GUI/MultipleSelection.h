@@ -21,7 +21,7 @@ public:
 
 	void addSelection(std::unique_ptr<Selection> _selections);
 
-	std::vector<const bool*> getHandleToPointersToValues();
+	std::vector<const bool*> getPointersToValues();
 
 protected:
 	std::vector<std::unique_ptr<Selection>> m_selections;
