@@ -12,7 +12,7 @@ Options::Options(sf::Vector2f pos, sf::Vector2f size) :
 	m_selectedOption->shape.setSize(sf::Vector2f(m_width, m_height - 1));
 }
 
-void Options::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void Options::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	switch (e.type) {
 	case sf::Event::MouseButtonPressed:
@@ -22,7 +22,7 @@ void Options::handleEvents(sf::Event e, const sf::RenderWindow& window)
 			if (m_clicked)
 			{
 				for (int i = 0; i < m_options.size(); i++)
-					if (isHovering(m_options[i].shape, window))
+					if (isHovering(m_options[i].shape, window, displacement))
 					{
 						m_selectedOption = std::make_unique<Option>(m_options[i]);
 						m_selectedOption->text->setPosition(m_selectedOption->text->getPosition() - sf::Vector2f(0, (i + 1) * m_height));
@@ -33,7 +33,7 @@ void Options::handleEvents(sf::Event e, const sf::RenderWindow& window)
 					}
 			}
 
-			if (isHovering(sf::IntRect(m_x + m_width / 2, m_y + m_height / 2, m_width, m_height), window))
+			if (isHovering(sf::IntRect(m_x + m_width / 2, m_y + m_height / 2, m_width, m_height), window, displacement))
 				m_clicked = !m_clicked;
 		}
 	} break;
@@ -82,21 +82,21 @@ void Options::addOption(std::string _option)
 	m_options.push_back(o);
 }
 
-sf::Vector2f Options::getMouseWorldPos(const sf::RenderWindow& window)
+sf::Vector2f Options::getMouseWorldPos(const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	auto pixelPos = sf::Mouse::getPosition(window);
-	return window.mapPixelToCoords(pixelPos);
+	return window.mapPixelToCoords(pixelPos) + displacement;
 }
 
-bool Options::isHovering(sf::IntRect rect, const sf::RenderWindow& window)
+bool Options::isHovering(sf::IntRect rect, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
-	auto worldPos = getMouseWorldPos(window);
+	auto worldPos = getMouseWorldPos(window, displacement);
 	return rect.contains(worldPos.x, worldPos.y);
 }
 
-bool Options::isHovering(const sf::RectangleShape& _rect, const sf::RenderWindow& window)
+bool Options::isHovering(const sf::RectangleShape& _rect, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
-	auto worldPos = getMouseWorldPos(window);
+	auto worldPos = getMouseWorldPos(window, displacement);
 	return _rect.getGlobalBounds().contains(worldPos);
 }
 

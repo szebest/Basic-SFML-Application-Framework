@@ -9,7 +9,7 @@ class Options : public Widget
 public:
 	Options(sf::Vector2f pos, sf::Vector2f size);
 
-	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
+	void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement) override;
 
 	void update(const sf::Time& deltaTime) override;
 
@@ -62,11 +62,11 @@ private:
 
 	std::vector<Option> m_options;
 
-	sf::Vector2f getMouseWorldPos(const sf::RenderWindow& window);
+	sf::Vector2f getMouseWorldPos(const sf::RenderWindow& window, sf::Vector2f displacement);
 
-	bool isHovering(sf::IntRect rect, const sf::RenderWindow& window);
+	bool isHovering(sf::IntRect rect, const sf::RenderWindow& window, sf::Vector2f displacement);
 
-	bool isHovering(const sf::RectangleShape& _rect, const sf::RenderWindow& window);
+	bool isHovering(const sf::RectangleShape& _rect, const sf::RenderWindow& window, sf::Vector2f displacement);
 };
 
 inline std::unique_ptr<Options> makeOptions(sf::Vector2f pos, sf::Vector2f size)

@@ -5,10 +5,10 @@ MultipleSelection::MultipleSelection()
 	
 }
 
-void MultipleSelection::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void MultipleSelection::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	for (auto& selection : m_selections)
-		selection->handleEvents(e, window);
+		selection->handleEvents(e, window, displacement);
 }
 
 void MultipleSelection::update(const sf::Time& deltaTime)

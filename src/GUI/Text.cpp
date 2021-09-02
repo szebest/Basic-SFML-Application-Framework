@@ -17,7 +17,7 @@ Text::Text(const Text& other) :
 
 }
 
-void Text::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void Text::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 
 }

@@ -10,7 +10,7 @@ class InputForm : public Widget
 public:
 	InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToString);
 
-	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
+	void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement) override;
 
 	void update(const sf::Time& deltaTime) override;
 
@@ -47,7 +47,7 @@ private:
 
 	sf::Clock m_clock;
 
-	bool isHovering(const sf::RenderWindow& window);
+	bool isHovering(const sf::RenderWindow& window, sf::Vector2f displacement);
 
 	void toClipboard(const std::string& s);
 };

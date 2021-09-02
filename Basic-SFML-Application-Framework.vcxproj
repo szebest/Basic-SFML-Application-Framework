@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GUI\Button.cpp" />
+    <ClCompile Include="src\GUI\Canvas.cpp" />
     <ClCompile Include="src\GUI\FrameRate.cpp" />
     <ClCompile Include="src\GUI\InputForm.cpp" />
     <ClCompile Include="src\GUI\MultipleSelection.cpp" />
@@ -36,6 +37,7 @@
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GUI\Button.h" />
+    <ClInclude Include="src\GUI\Canvas.h" />
     <ClInclude Include="src\GUI\FrameRate.h" />
     <ClInclude Include="src\GUI\InputForm.h" />
     <ClInclude Include="src\GUI\Options.h" />

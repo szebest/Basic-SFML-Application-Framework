@@ -10,7 +10,7 @@ class Widget
 public:
 	Widget() = default;
 
-	virtual void handleEvents(sf::Event e, const sf::RenderWindow& window) = 0;
+	virtual void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement = sf::Vector2f(0, 0)) = 0;
 
 	virtual void update(const sf::Time& deltaTime) = 0;
 

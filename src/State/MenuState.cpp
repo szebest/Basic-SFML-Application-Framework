@@ -71,14 +71,18 @@ MenuState::MenuState(Game& _game)
 	m_text1->setOutlineThickness(0);
 	m_text1->setOutlineColor(sf::Color::White);
 
-	m_widgets.push_back(std::move(m_button1));
-	m_widgets.push_back(std::move(m_button2));
-	m_widgets.push_back(std::move(m_inputForm));
-	m_widgets.push_back(std::move(m_text1));
+	auto m_canvas = makeCanvas(sf::FloatRect(0, 0, m_game->getWindow().getSize().x, m_game->getWindow().getSize().y), 500);
+
+	m_canvas->addWidget(std::move(m_button1));
+	m_canvas->addWidget(std::move(m_button2));
+	m_canvas->addWidget(std::move(m_inputForm));
+	m_canvas->addWidget(std::move(m_text1));
+	m_canvas->addWidget(std::move(m_options));
+
+	m_widgets.push_back(std::move(m_canvas));
 	m_widgets.push_back(std::move(m_fps1));
 
 	m_widgetsAfterClick.push_back(std::move(m_button11));
-	m_widgets.push_back(std::move(m_options));
 	m_widgetsAfterClick.push_back(std::move(m_fps2));
 	//m_widgets.push_back(std::move(m_multipleSelection));
 

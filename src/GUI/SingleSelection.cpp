@@ -7,7 +7,7 @@ SingleSelection::SingleSelection()
 	
 }
 
-void SingleSelection::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void SingleSelection::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	std::vector<const bool*> ptrValuesBefore = getPointersToValues();
 	std::vector<bool> valuesBefore;
@@ -16,7 +16,7 @@ void SingleSelection::handleEvents(sf::Event e, const sf::RenderWindow& window)
 		valuesBefore.push_back(*ptrValuesBefore[i]);
 
 	for (auto& selection : m_selections)
-		selection->handleEvents(e, window);
+		selection->handleEvents(e, window, displacement);
 
 	std::vector<const bool*> valuesAfter = getPointersToValues();
 

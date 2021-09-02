@@ -11,7 +11,7 @@ FrameRate::FrameRate(sf::Vector2f pos) :
 	setFixedPos(true);
 }
 
-void FrameRate::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void FrameRate::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 
 }

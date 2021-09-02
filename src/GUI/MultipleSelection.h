@@ -11,7 +11,7 @@ class MultipleSelection : public Widget
 public:
 	MultipleSelection();
 
-	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
+	void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement) override;
 
 	void update(const sf::Time& deltaTime) override;
 

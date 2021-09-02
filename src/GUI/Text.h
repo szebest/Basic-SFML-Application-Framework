@@ -20,7 +20,7 @@ public:
 		m_func = [this, args...]() { this->m_print(args...); };
 	}
 
-	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
+	void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement) override;
 
 	void update(const sf::Time& deltaTime) override;
 

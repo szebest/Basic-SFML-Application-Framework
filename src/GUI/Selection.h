@@ -8,7 +8,7 @@ class Selection : public Widget
 public:
 	Selection(sf::Vector2f pos);
 
-	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
+	void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement) override;
 
 	void update(const sf::Time& deltaTime) override;
 
@@ -30,7 +30,7 @@ private:
 
 	bool m_selected;
 
-	bool isHovering(const sf::RenderWindow& window);
+	bool isHovering(const sf::RenderWindow& window, sf::Vector2f displacement);
 };
 
 inline std::unique_ptr<Selection> makeSelection(sf::Vector2f pos)

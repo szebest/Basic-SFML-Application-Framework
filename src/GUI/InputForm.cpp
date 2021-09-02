@@ -29,7 +29,7 @@ InputForm::InputForm(sf::Vector2f pos, sf::Vector2f size, std::string* ptrToStri
     m_underline.setCharacterSize(32);
 }
 
-void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         m_selected = false;
@@ -83,7 +83,7 @@ void InputForm::handleEvents(sf::Event e, const sf::RenderWindow& window)
             {
                 m_underline.setString("");
 
-                m_active = isHovering(window);
+                m_active = isHovering(window, displacement);
 
                 if (m_active)
                     setColor(sf::Color(45, 45, 45));
@@ -162,10 +162,10 @@ void InputForm::setColor(sf::Color color)
     m_shape.setFillColor(color);
 }
 
-bool InputForm::isHovering(const sf::RenderWindow& window)
+bool InputForm::isHovering(const sf::RenderWindow& window, sf::Vector2f displacement)
 {
     auto pixelPos = sf::Mouse::getPosition(window);
-    auto worldPos = window.mapPixelToCoords(pixelPos);
+    auto worldPos = window.mapPixelToCoords(pixelPos) + displacement;
     return m_shape.getGlobalBounds().contains(worldPos.x, worldPos.y);
 }
 

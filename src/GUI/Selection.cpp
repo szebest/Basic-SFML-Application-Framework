@@ -9,13 +9,13 @@ Selection::Selection(sf::Vector2f pos) :
 	setPosition(pos);
 }
 
-void Selection::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void Selection::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	switch (e.type) {
 	case sf::Event::MouseButtonPressed:
 	{
 		if (e.mouseButton.button == sf::Mouse::Left)
-			if (isHovering(window))
+			if (isHovering(window, displacement))
 				m_selected = !m_selected;
 	} break;
 	default:
@@ -49,10 +49,10 @@ sf::Vector2f Selection::getPosition()
 	return m_outerShape.getPosition() + sf::Vector2f(radius, radius) / 2.f;
 }
 
-bool Selection::isHovering(const sf::RenderWindow& window)
+bool Selection::isHovering(const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	auto pixelPos = sf::Mouse::getPosition(window);
-	auto worldPos = window.mapPixelToCoords(pixelPos);
+	auto worldPos = window.mapPixelToCoords(pixelPos) + displacement;
 	return m_outerShape.getGlobalBounds().contains(worldPos.x, worldPos.y);
 }
 

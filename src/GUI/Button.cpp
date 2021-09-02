@@ -13,13 +13,13 @@ Button::Button(sf::Vector2f pos, sf::Vector2f size, const std::string& text) :
 	setText(text);
 }
 
-void Button::handleEvents(sf::Event e, const sf::RenderWindow& window)
+void Button::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	switch (e.type) {
 		case sf::Event::MouseButtonPressed:
 		{
 			if (e.mouseButton.button == sf::Mouse::Left)
-				if (isHovering(window))
+				if (isHovering(window, displacement))
 					m_shouldCall = true;
 		} break;
 		default:
@@ -84,9 +84,9 @@ void Button::setFunction(std::function<void()> function)
 	m_function = function;
 }
 
-bool Button::isHovering(const sf::RenderWindow& window)
+bool Button::isHovering(const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	auto pixelPos = sf::Mouse::getPosition(window);
-	auto worldPos = window.mapPixelToCoords(pixelPos);
+	auto worldPos = window.mapPixelToCoords(pixelPos) + displacement;
 	return m_shape.getGlobalBounds().contains(worldPos.x, worldPos.y);
 }

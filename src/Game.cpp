@@ -37,7 +37,6 @@ int Game::run()
                 BaseState& currentState = getCurrentState();
                 currentState.update(elapsed);
 
-                //Render
                 m_window.clear();
 
                 currentState.draw(m_window);

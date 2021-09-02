@@ -10,7 +10,7 @@ class Button : public Widget
 public:
 	Button(sf::Vector2f pos, sf::Vector2f size, const std::string& text);
 
-	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
+	void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement) override;
 
 	void update(const sf::Time& deltaTime) override;
 
@@ -41,7 +41,7 @@ private:
 
 	bool m_shouldCall;
 
-	bool isHovering(const sf::RenderWindow& window);
+	bool isHovering(const sf::RenderWindow& window, sf::Vector2f displacement);
 };
 
 inline std::unique_ptr<Button> makeButton(sf::Vector2f pos, sf::Vector2f size, const std::string& text)

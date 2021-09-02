@@ -8,7 +8,7 @@ class SingleSelection : public MultipleSelection
 public:
 	SingleSelection();
 
-	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
+	void handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement) override;
 };
 
 inline std::unique_ptr<SingleSelection> makeSingleSelection()
