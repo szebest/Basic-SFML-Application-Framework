@@ -28,6 +28,10 @@ private:
 
 	int m_value = 5;
 
+	const std::string* m_ptrToOptionString;
+
+	const int* m_ptrToOptionIndex;
+
 	std::vector<const bool*> vecPtrToSelectBox;
 
 	const float* fpsValuePointer = nullptr;

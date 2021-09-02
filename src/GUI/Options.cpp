@@ -1,6 +1,7 @@
 #include "Options.h"
 
-Options::Options(sf::Vector2f pos)
+Options::Options(sf::Vector2f pos, sf::Vector2f size) :
+	m_width(size.x), m_height(size.y)
 {
 	setPosition(pos);
 
@@ -18,13 +19,19 @@ void Options::handleEvents(sf::Event e, const sf::RenderWindow& window)
 	{
 		if (e.mouseButton.button == sf::Mouse::Left)
 		{
-			for (int i = 0; i < m_options.size(); i++)
-				if (isHovering(m_options[i].shape, window))
-				{
-					m_selectedOption = std::make_unique<Option>(m_options[i]);
-					m_selectedOption->text->setPosition(m_selectedOption->text->getPosition() - sf::Vector2f(0, (i + 1) * m_height));
-					m_selectedOption->shape.setPosition(sf::Vector2f(m_x + m_width / 2.f, m_y + m_height / 2.f));
-				}
+			if (m_clicked)
+			{
+				for (int i = 0; i < m_options.size(); i++)
+					if (isHovering(m_options[i].shape, window))
+					{
+						m_selectedOption = std::make_unique<Option>(m_options[i]);
+						m_selectedOption->text->setPosition(m_selectedOption->text->getPosition() - sf::Vector2f(0, (i + 1) * m_height));
+						m_selectedOption->shape.setPosition(sf::Vector2f(m_x + m_width / 2.f, m_y + m_height / 2.f));
+
+						m_index = i;
+						m_selectedStringOption = m_selectedOption->text->getString();
+					}
+			}
 
 			if (isHovering(sf::IntRect(m_x + m_width / 2, m_y + m_height / 2, m_width, m_height), window))
 				m_clicked = !m_clicked;
@@ -91,4 +98,14 @@ bool Options::isHovering(const sf::RectangleShape& _rect, const sf::RenderWindow
 {
 	auto worldPos = getMouseWorldPos(window);
 	return _rect.getGlobalBounds().contains(worldPos);
+}
+
+const std::string* Options::getPtrToString()
+{
+	return &m_selectedStringOption;
+}
+
+const int* Options::getPtrToIndex()
+{
+	return &m_index;
 }

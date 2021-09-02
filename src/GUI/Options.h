@@ -7,7 +7,7 @@
 class Options : public Widget
 {
 public:
-	Options(sf::Vector2f pos);
+	Options(sf::Vector2f pos, sf::Vector2f size);
 
 	void handleEvents(sf::Event e, const sf::RenderWindow& window) override;
 
@@ -21,12 +21,18 @@ public:
 
 	void addOption(std::string _option);
 
+	const std::string* getPtrToString();
+
+	const int* getPtrToIndex();
+
 private:
-	int m_height = 35;
-	int m_width = 192;
+	int m_height;
+	int m_width;
 	int m_x;
 	int m_y;
+	int m_index = -1;
 	bool m_clicked = false;
+	std::string m_selectedStringOption = "";
 
 	struct Option {
 		sf::RectangleShape shape;
@@ -63,9 +69,9 @@ private:
 	bool isHovering(const sf::RectangleShape& _rect, const sf::RenderWindow& window);
 };
 
-inline std::unique_ptr<Options> makeOptions(sf::Vector2f pos)
+inline std::unique_ptr<Options> makeOptions(sf::Vector2f pos, sf::Vector2f size)
 {
-	return std::make_unique<Options>(pos);
+	return std::make_unique<Options>(pos, size);
 }
 
 #endif
