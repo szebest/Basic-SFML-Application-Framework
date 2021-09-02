@@ -19,6 +19,7 @@ public:
 	void addWidget(std::unique_ptr<Widget> _widget);
 private:
 	float m_scrollY = 0.f;
+	float m_scrollYActual = 0.f;
 	float m_deltaScroll = 0.f;
 	float m_maxScrollY;
 	sf::FloatRect m_drawingDimensions;
@@ -27,6 +28,8 @@ private:
 	sf::Sprite m_sprite;
 
 	std::vector<std::unique_ptr<Widget>> m_widgets;
+
+	float lerp(float a, float b, float t);
 };
 
 inline std::unique_ptr<Canvas> makeCanvas(sf::FloatRect _drawingDimensions, int _maxScrollX)

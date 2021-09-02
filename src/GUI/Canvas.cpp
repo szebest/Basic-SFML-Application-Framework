@@ -28,9 +28,10 @@ void Canvas::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vecto
 
 void Canvas::update(const sf::Time& deltaTime)
 {
-	m_scrollY += m_deltaScroll * deltaTime.asSeconds() * 2500;
-	m_scrollY = std::max(0.f, m_scrollY);
-	m_scrollY = std::min(m_maxScrollY, m_scrollY);
+	m_scrollYActual += m_deltaScroll * deltaTime.asSeconds() * 2500;
+	m_scrollYActual = std::max(0.f, m_scrollYActual);
+	m_scrollYActual = std::min(m_maxScrollY, m_scrollYActual);
+	m_scrollY = lerp(m_scrollY, m_scrollYActual, 0.15f);
 	m_deltaScroll = 0.f;
 
 	for (const auto& widget : m_widgets)
@@ -59,4 +60,9 @@ void Canvas::draw(sf::RenderTarget& target)
 void Canvas::addWidget(std::unique_ptr<Widget> _widget)
 {
 	m_widgets.push_back(std::move(_widget));
+}
+
+float Canvas::lerp(float a, float b, float t)
+{
+	return a + t * (b - a);
 }
