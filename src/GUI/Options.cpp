@@ -15,30 +15,46 @@ Options::Options(sf::Vector2f pos, sf::Vector2f size) :
 void Options::handleEvents(sf::Event e, const sf::RenderWindow& window, sf::Vector2f displacement)
 {
 	switch (e.type) {
-	case sf::Event::MouseButtonPressed:
-	{
-		if (e.mouseButton.button == sf::Mouse::Left)
+		case sf::Event::MouseButtonPressed:
 		{
-			if (m_clicked)
+			if (e.mouseButton.button == sf::Mouse::Left)
 			{
-				for (int i = 0; i < m_options.size(); i++)
-					if (isHovering(m_options[i].shape, window, displacement))
-					{
-						m_selectedOption = std::make_unique<Option>(m_options[i]);
-						m_selectedOption->text->setPosition(m_selectedOption->text->getPosition() - sf::Vector2f(0, (i + 1) * m_height));
-						m_selectedOption->shape.setPosition(sf::Vector2f(m_x + m_width / 2.f, m_y + m_height / 2.f));
+				if (m_clicked)
+				{
+					for (int i = 0; i < m_options.size(); i++)
+						if (isHovering(m_options[i].shape, window, displacement))
+						{
+							m_selectedOption = std::make_unique<Option>(m_options[i]);
+							m_selectedOption->shape.setFillColor(sf::Color(200, 200, 200));
+							m_selectedOption->text->setPosition(m_selectedOption->text->getPosition() - sf::Vector2f(0, (i + 1) * m_height));
+							m_selectedOption->shape.setPosition(sf::Vector2f(m_x + m_width / 2.f, m_y + m_height / 2.f));
 
-						m_index = i;
-						m_selectedStringOption = m_selectedOption->text->getString();
-					}
+							m_index = i;
+							m_selectedStringOption = m_selectedOption->text->getString();
+						}
+				}
+
+				if (isHovering(sf::IntRect(m_x + m_width / 2, m_y + m_height / 2, m_width, m_height), window, displacement))
+					m_clicked = !m_clicked;
 			}
-
+		} break;
+		case sf::Event::MouseWheelScrolled:
+		case sf::Event::MouseMoved:
+		{
+			for (auto& option : m_options)
+			{
+				if (isHovering(option.shape, window, displacement))
+					option.shape.setFillColor(sf::Color(150, 150, 150));
+				else
+					option.shape.setFillColor(sf::Color(200, 200, 200));
+			}
 			if (isHovering(sf::IntRect(m_x + m_width / 2, m_y + m_height / 2, m_width, m_height), window, displacement))
-				m_clicked = !m_clicked;
+				m_selectedOption->shape.setFillColor(sf::Color(150, 150, 150));
+			else
+				m_selectedOption->shape.setFillColor(sf::Color(200, 200, 200));
 		}
-	} break;
-	default:
-		break;
+		default:
+			break;
 	}
 }
 

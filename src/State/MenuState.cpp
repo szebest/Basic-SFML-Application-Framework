@@ -11,9 +11,11 @@ MenuState::MenuState(Game& _game)
 	m_options->addOption("druga");
 	m_options->addOption("trzeciaaaaaaaaaaaaaaa");
 
+	for (int i = 0; i < 10; i++)
+		m_options->addOption(std::to_string(i));
+
 	m_ptrToOptionString = m_options->getPtrToString();
 	m_ptrToOptionIndex = m_options->getPtrToIndex();
-
 
 	auto m_button1 = makeButton((sf::Vector2f)_game.getWindow().getSize() / 2.f, sf::Vector2f(200, 100), "Button 1");
 

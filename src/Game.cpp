@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game(std::string&& name, unsigned int width, unsigned int height)
-	: m_window({ width, height }, std::move(name))
+	: m_window({ width, height }, "XD")
 {
     pushState(std::unique_ptr<MenuState>(new MenuState(*this)));
 }
